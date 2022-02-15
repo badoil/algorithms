@@ -1,4 +1,4 @@
-# 380
+# 380 좋은 문제임
 # O(1)의 insert, remove, random return 구현
 # 문제: O(1) Insert, Remove, Random Return을 지원하는 hash Set을 구현하여라
 # 해쉬를 이용하므로 O(1) 시간복잡도
