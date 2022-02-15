@@ -5,7 +5,9 @@
 # 하지만 이진탐색 binary search 를 이용하면 O(log n)으로 해결 가능
 # left right 인덱스값이 만나는 그 값이 피크 값임
 # 피크가 있다면 순서대로 leftIdx, pivot=leftIdx+1, rightIdx=pivot+1 인 지점을 찾게되고 각 인덱스가 0, 1, 2 이라면
-# 다음으로 leftIdx 와 pivot은 0, rightIdx = 1 상황이 되서, 조건문에 의해 leftIdx = pivot+1이 되어 1이 되고 이는 leftIdx=rightIdx 경우가 반드시 생김
+# rightIdx = pivot 이 되고, 각각 인덱스 0, 1, 1 
+# 그러면 다음으로 leftIdx 와 pivot은 0, rightIdx = 1 상황이 되서, nums[pivot] < nums[pivot+1] 조건문에 걸리고
+# 조건문에 의해 leftIdx = pivot+1이 되어 1이 되고 이는 leftIdx=rightIdx 경우가 반드시 생김
 # 이때 반복문은 탈출하고 leftIdx or rightIdx 값을 리턴하면 됨 
 
 from typing import List
