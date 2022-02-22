@@ -74,13 +74,13 @@ def mergeSorting(nums: List[int]) -> List[int]:
   # 병합하는 부분
   while leftIdx < len(leftSortedNum) or rightIdx < len(rightSortedNum):   # 둘 중 하나의 쪼개진 배열의 인덱스를 넘지 않는 동안
     if leftIdx == len(leftSortedNum):                                     # 두 배열 중 한 배열의 원소들을 다 합쳐주었다면
-      lastRightNum = nums[rightIdx]                                       # 남은 다른 배열의 원소를 합쳐줌
+      lastRightNum = rightSortedNum[rightIdx]                                       # 남은 다른 배열의 원소를 합쳐줌
       mergeResult.append(lastRightNum)
       rightIdx += 1
       continue
 
     if rightIdx == len(rightSortedNum):                                  # 두 배열 중 한 배열의 원소들을 다 합쳐주었다면
-      lastLeftNum = nums[leftIdx]                                        # 남은 다른 배열의 원소를 합쳐줌
+      lastLeftNum = leftSortedNum[leftIdx]                                        # 남은 다른 배열의 원소를 합쳐줌
       mergeResult.append(lastLeftNum)
       leftIdx += 1
       continue
