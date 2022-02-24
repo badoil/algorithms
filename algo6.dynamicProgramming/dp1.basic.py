@@ -33,6 +33,8 @@ def recurMemoFibo(num: int) -> int:
   fibo = recurMemoFibo(num-1) + recurMemoFibo(num-2)
   return fibo
 
+recurMemoFibo(5)
+
 
 # 바텀-업
 # 시간복잡도 O(n), 공간복잡도 O(n)
