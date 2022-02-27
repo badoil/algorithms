@@ -1,3 +1,6 @@
+# 622
+
+
 class CircularQueue:  
   def __init__(self, k: int):
     self._data = [None] * k

@@ -80,7 +80,7 @@ class Copy:
 
 
     crtNode = head
-    while crtNode:                   # 지그재그 형태로 원본 노드의 next는 동일한 값을 가지는 복사본 노드를 가리키게 됨
+    while crtNode:                   # 지그재그 형태를 가지면, 원본 노드의 next는 동일한 값을 가지는 복사본 노드를 가리키게 됨
       tempNode = crtNode.next
       randomNode = crtNode.random
       toNode = None
@@ -93,7 +93,7 @@ class Copy:
     crtNode = head
     dummy = ListNode(-1)              # 새롭게 카피한 노드를 리턴하기 위해서 더미 노드 필요함
     dummy.next = crtNode.next
-    while crtNode and crtNode.next:
+    while crtNode and crtNode.next:   # crtNode.next 도 조건으로 들어가는 이유는 마지막 노드는 처리할 필요가 없기 때문임
       tempNode = crtNode.next
 
       crtNode.next = crtNode.next.next
