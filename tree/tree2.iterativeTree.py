@@ -1,7 +1,7 @@
 # iterative tree traversal은 그래프 자료구조 BFS DFS의 특수 케이스
 # 특히 postorder가 BFS DFS와 연관
 
-
+# 얘는 좀 외울 필요가 있겠음
 
 class TreeNode:
   def __init__(self, val):

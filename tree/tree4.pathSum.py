@@ -1,3 +1,10 @@
+# 113
+# Tree 의 root로 부터 leaf까지의 sum이 targetSum이 되는 모든 path를 찾아서 return하여라
+# 백트래킹으로 풀 수 있음, preorder로 모든 노드를 순회하면서 백트래킹
+# 각 노드들의 연결을 모든 가능성 공간으로 보는 것임
+
+
+
 from collections import deque
 from typing import List
 
@@ -46,37 +53,69 @@ def printTreeNode(node: TreeNode):
 printTreeNode(root)
 
 
-class Path:
-  def getPathes(self, root: TreeNode, sum: int) -> List[List[int]]:
+class pathSum:
+  def getPathes(self, root: TreeNode, targetSum: int) -> List[List[int]]:
+    if root is None:
+      return []
+    
+    self._retList = []
+    self._recurPathSum(root,targetSum,[]) 
+  
+    return self._retList
+  
+  def _recurPathSum(self, node:TreeNode, targetSum: int, crntList: List[int]):
+    if node.left is None and node.right is None:
+      if node.val == targetSum:
+        crntList.append(node.val)
+        self._retList.append(crntList.copy())
+        crntList.pop()
+      return
+    
+    
+    newTargetSum = targetSum - node.val
+    if node.left:
+      crntList.append(node.val)
+      self._recurPathSum(node.left,newTargetSum,crntList)
+      crntList.pop()
+    if node.right:
+      crntList.append(node.val)
+      self._recurPathSum(node.right,newTargetSum,crntList)
+      crntList.pop()    
+    return
+
+pathSum = pathSum()
+pathSum.getPathes(root,20)
+
+
+###############################################################################
+
+class SumPath:
+  def solution(self, root: TreeNode, targetSum: int) -> List[List[int]]:
     if root is None:
       return []
 
-    self._resultArray = []
-    self._getSum(root, sum, [])
-
-    return self._resultArray
-
-  def _getSum(self, node: TreeNode, targetSum: int, crtList: List):
-    if node.left is None and node.right is None:
-      if node.val == targetSum:
-        crtList.append(node.val)
-        self._resultArray.append(crtList.copy())
-        crtList.pop()
-      return
-
-    newSum = targetSum - node.val
-    if node.left:
-      crtList.append(node.val)
-      self._getSum(node.left, newSum, crtList)
-      crtList.pop()
-    if node.right:
-      crtList.append(node.val)
-      self._getSum(node.right, newSum, crtList)
-      crtList.pop()
-
-    return
-
+    self._results = []
+    self._backTrackingPathSum(root, targetSum, [])
+    return self._results
     
-path = Path()
 
-path.getPathes(root, 20)
+  def _backTrackingPathSum(self, node: TreeNode, partialSum: int, crtArray: List[int]):
+    if node.val == partialSum:
+      crtArray.append(node.val)
+      self._results.append(crtArray.copy())   
+      crtArray.pop()
+      return 
+
+    sum = partialSum - node.val
+
+    if node.left:
+      crtArray.append(node.val)
+      self._backTrackingPathSum(node.left, sum, crtArray)
+      crtArray.pop()      # 해당 노드는 루트 노드이기 때문에 재귀함수 호출 후에 그 루트노드를 팝해서 삭제해야함. 
+
+    if node.right:
+      crtArray.append(node.val)
+      self._backTrackingPathSum(node.right, sum, crtArray)
+      crtArray.pop()
+
+    return          # 만약 노드 끝까지 갔는데 node.val == partialSum 이 아니라면 여기서 재귀호출을 리턴해야 그 전으로 돌아감
