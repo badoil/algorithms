@@ -1,3 +1,8 @@
+# iterative tree traversal은 그래프 자료구조 BFS DFS의 특수 케이스
+# 특히 postorder가 BFS DFS와 연관
+
+
+
 class TreeNode:
   def __init__(self, val):
     self.val = val
@@ -20,6 +25,7 @@ node3.left = node6
 node3.right = node7
 
 
+# NLR
 def preorder(node: TreeNode):
   if node is None:
     return
@@ -39,6 +45,7 @@ def preorder(node: TreeNode):
 preorder(node1)
 
 
+#LNR
 def inorder(node:TreeNode):
   if node is None:
     return
@@ -60,6 +67,7 @@ def inorder(node:TreeNode):
 inorder(node1)
 
 
+#LRN
 def iterativePostorder(node):
   stack = []
   last_visit_node = None

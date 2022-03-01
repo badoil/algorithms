@@ -1,3 +1,13 @@
+# full binary tree: 자식 노드가 없거나 자식 노드 2개가 다 있는 노드만 있는 트리
+# complete binary tree: 왼쪽 위에서부터 가득 차 있는 바이너리 트리, 위에서부터 왼쪽만 정렬되어 있으면 됨
+# perfect binary tree: 자식 노드를 모두 가지고 있고, leaf가 모두 같은 레벨에 있는 트리
+
+# tree traverse(트리 이동) 하는 방법: preorder, inorder, postorder
+# preorder: NLR(부모노드 -> 왼쪽 자식노드 -> 오른쪽 자식노드) N(부모노드)가 맨 앞에 온다
+# inorder: LNR(왼쪽 자식노드 -> 부모노드 -> 오른쪽 자식노드) N(부모노드)가 가운데에 온다
+# postorder: LRN(왼쪽 자식노드 -> 오른쪽 자식노드 -> 부모노드) N(부모노드)가 맨 뒤에 온다
+
+
 class TreeNode:
   def __init__(self, val):
     self.val = val
