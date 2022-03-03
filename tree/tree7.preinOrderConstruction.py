@@ -1,4 +1,16 @@
+# 105
+# 문제:  preOrder list와 inOrder List가 주어졌을때 두개의 Lists를 기반으로 Tree를 구성하여라
+
+# preorder = [1,3,7,5,2,4]
+# inorder = [7,3,1,2,5,4]
+
+# 하나의 preOrder list 만들어질 수 있는 트리는 다양한 경우의 수가 있기 때문에 inOrder List도 필요
+# preorder의 첫번째 값이 root, 이 root를 기준으로 inorder에성 좌우를 나눌 수 있음
+# 즉 하나의 프라블럼을 두개의 서브 프라블럼으로 나눔, 이것은 recursive로 만들면 된다고 생각할 수 있음
+
+
 from collections import deque
+from platform import node
 from typing import List
 
 class TreeNode:
@@ -113,70 +125,69 @@ treeLevelPrint(root)
 
 #############################################
 
-class BuildTree:
-  def build(self, preorder:List[int], inorder:List[int]) -> TreeNode:
-    if preorder is None:
-      return None
+class MakingTree:
+  def solution(self, preorderNodeA: List[int], inorderNodeB: List[int]) -> TreeNode:
+    if len(preorderNodeA) is None: 
+      return
 
-    result = self._recurBuild()
-
-  def _recurBuild(self, preorder:List[int], inorder:List[int]) -> TreeNode:
-    if preorder is None:
-      return None
-
-    val = preorder[0]
-    centerIdx = inorder.index(val)
-
-    inorderLeft = inorder[0: centerIdx]
-    inorderRight = inorder[centerIdx+1:]
-
-    leftCount = len(inorderLeft)
-    preorderLeft = preorder[1:leftCount]
-    preorderRight = preorder[leftCount+1:]
-
-    crtNode = TreeNode(val)
-
-    leftTree = self._recurBuild(preorderLeft, inorderLeft)
-    rightTree = self._recurBuild(preorderRight, inorderRight)
-
-    crtNode.left = leftTree
-    crtNode.right = rightTree
-
-    return crtNode
-
-class BuildTreeHash:
-  def build(self, preorder: List[int], inorder: List[int]) -> TreeNode:
-    if preorder is None:
-      return None
-
-    self._preorder = preorder
-    self._inorder = inorder
-    self._preorderIdx = 0
-
-    self._inorderHash = {}
-    for idx, val in enumerate(self._inorder):
-      self._inorderHash[val] = idx
-      
-    result = self._recurTree(0, len(preorder)-1)
+    result = self._recur(preorderNodeA, inorderNodeB)
     return result
 
-  def _recurTree(self, leftIdx: int, rightIdx: int) -> TreeNode:
-    if leftIdx > rightIdx:
-      return None
     
-    val = self._preorder[self._preorderIdx]
-    centerIdx = self._inorderHash[val]
-    self._preorderIdx += 1
+  def _recur(self, nodeA: List[int], nodeB: List[int]):
+    if len(nodeA) == 0:
+      return
+
+    val = nodeA[0]
+    centerIdx = nodeB.index(val)
 
     crtNode = TreeNode(val)
+    
+    leftInorder = nodeB[0:centerIdx]
+    leftCount = len(leftInorder)
+    leftPreorder = nodeA[1: leftCount+1]
 
-    leftTree = self._recurTree(leftIdx, centerIdx-1)
-    rightTree = self._recurTree(centerIdx+1, rightIdx)
+    rightInorder = nodeB[centerIdx+1:]
+    rightPreorder = nodeA[leftCount+1:]
 
-    crtNode.left = leftTree
-    crtNode.right = rightTree
+    leftResult = self._recur(leftPreorder, leftInorder)
+    rightResult = self._recur(rightPreorder, rightInorder)
+
+    crtNode.left = leftResult
+    crtNode.right = rightResult
+
+    return root
+
+
+class MakingTreeByHash:
+  def solution(self, preorderNodeA: List[int], inorderNodeB: List[int]) -> TreeNode:
+    if len(preorderNodeA) == 0:
+      return None
+
+    self._preorderIdx = 0
+    self._preorderNodeA = preorderNodeA
+    self._inorderNodeB = inorderNodeB
+    self._hash = {}
+    for idx, val in enumerate(inorderNodeB):
+      self._hash[val] = idx
+
+    count = len(preorderNodeA)
+    result = self._recur(0, count-1)
+    return result
+
+  def _recur(self, leftIdx: int, rightIdx: int) -> TreeNode:
+    if leftIdx > rightIdx:
+      return None
+
+    val = self._preorderNodeA[0]
+    centerIdx = self._inorderNodeB.index(val)
+    self._preorderIdx += 1
+
+    leftResult = self._recur(leftIdx, centerIdx-1)
+    rightResult = self._recur(centerIdx+1 ,rightIdx)
+
+    crtNode = TreeNode(val)
+    crtNode.left = leftResult
+    crtNode.right = rightResult
 
     return crtNode
-
-
-    
