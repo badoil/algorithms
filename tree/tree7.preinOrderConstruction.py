@@ -8,6 +8,14 @@
 # preorder의 첫번째 값이 root, 이 root를 기준으로 inorder에성 좌우를 나눌 수 있음
 # 즉 하나의 프라블럼을 두개의 서브 프라블럼으로 나눔, 이것은 recursive로 만들면 된다고 생각할 수 있음
 
+# 재귀함수에서 항상 잊지말아야할 것은 일단 끝까지 간다음에 거기서 결과값을 쌓아올리는 과정이라는 것임.
+# 여기 트리로 생각하면, 리프까지 가서 그 리프가 부모노드에 연결되서 리턴되면서 최상위 부모노드로 가는 과정인 것임
+
+# 재귀함수를 만들때는, 
+
+# 풀이법1: TC O(n*n), SC O(depth)
+# 풀이법2(hash): TC O(n), SC O(n)
+
 
 from collections import deque
 from platform import node
@@ -139,7 +147,7 @@ class MakingTree:
       return
 
     val = nodeA[0]
-    centerIdx = nodeB.index(val)
+    centerIdx = nodeB.index(val)    # 이 함수가 O(n)이 걸리고 이거 때문에 모든 노드를 순회 O(n)하는 재귀함수에, 워스트 케이스 O(n*n)이 나올 수 있음
 
     crtNode = TreeNode(val)
     
@@ -179,9 +187,9 @@ class MakingTreeByHash:
     if leftIdx > rightIdx:
       return None
 
-    val = self._preorderNodeA[0]
-    centerIdx = self._inorderNodeB.index(val)
-    self._preorderIdx += 1
+    val = self._preorderNodeA[self._preorderIdx]
+    centerIdx = self._hash[val]         # 해쉬맵은 O(1), 모든 노드를 순회 하는 재귀함수 O(n), 즉 O(n)
+    self._preorderIdx += 1              # 이놈이 함수 바깥에서 preorderNodeA 인덱스를 하나씩 오른쪽으로 이동하면서 매번 첫번째 값을 구하는 것임
 
     leftResult = self._recur(leftIdx, centerIdx-1)
     rightResult = self._recur(centerIdx+1 ,rightIdx)
