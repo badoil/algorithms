@@ -1,3 +1,7 @@
+
+# height balanced BST 란 외쪽 서브트리와 오른쪽 서브트리의 뎁스 차가 1 이하인 트리
+
+
 from collections import deque
 from typing import List
 
@@ -64,37 +68,50 @@ def LCA_BST(node: TreeNode, p: int, q: int) -> TreeNode:
 lca_node = LCA_BST(root, 7, 10 )
 print(lca_node.val) 
 
-##########################################
 
-def sortedArrToBst(nums: List[int]) -> TreeNode:
-  length = len(nums)
-  if length == 0:
+
+########################################################################
+# 108
+# sorted Array에서 height balanced BST를 만들어라
+
+
+def sortedArrayHBBST(nums: List[int]) -> TreeNode:
+  if len(nums) == 0:
     return None
 
-  centerIdx = length//2
+  count = len(nums)
+  centerIdx = count//2
+  
+  left = nums[0:centerIdx]
+  right = nums[centerIdx+1:]
 
-  leftNums = nums[0:centerIdx]
-  rightNums = nums[centerIdx+1:length]
+  leftResult = sortedArrayHBBST(left)
+  rightResult = sortedArrayHBBST(right)
 
-  leftNode = sortedArrToBst(leftNums)
-  rightNode = sortedArrToBst(rightNums)
+  crtNode = TreeNode(nums[centerIdx])
+  crtNode.left = leftResult
+  crtNode.right = rightResult
 
-  node = TreeNode(nums[centerIdx])
-  node.left = leftNode
-  node.right = rightNode
-
-  return node
+  return crtNode
 
 
-def lcaToBst(node: TreeNode, targetA: int, targetB: int) -> TreeNode:
+########################################################################
+# 235
+# 주어진 BST의 LCA를 찾아라
+# BST에서 해당 노드가 LCA 라면 targetA < node.val < targetB 일것. 이 조건을 만족하는 노드를 찾으면 됨
+
+def lowestCommonAncestorBinarySearchTree(node: TreeNode, targetA: int, targetB: int) -> TreeNode:
+  if node is None:
+    return None
+
   val = node.val
 
-  if val < targetA and val < targetB:
-    retRight = lcaToBst(node.right, targetA, targetB)
-    return retRight
+  if targetA > val and targetB > val:     # 타겟 A, B가 해당 노드 값보다 크면, 해당 노드의 오른쪽 자식 노드들만 탐색
+    result = lowestCommonAncestorBinarySearchTree(node.right, targetA, targetB)
+    return result
 
-  if val > targetA and val > targetB:
-    retLeft = lcaToBst(node.left, targetA, targetB)
-    return retLeft
-  
-  return  node
+  if targetA < val and targetB < val:     # 타겟 A, B가 해당 노드 값보다 작으면, 해당 노드의 왼쪽 자식 노드들만 탐색
+    result = lowestCommonAncestorBinarySearchTree(node.left, targetA, targetB)
+    return result
+
+  return node       # 위 조건문에 걸리지 않는 노드는 targetA < node.val < targetB 일것. 해당 노드 리턴
