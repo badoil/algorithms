@@ -1,3 +1,12 @@
+# 23
+# 문제 : k개의 정렬된 list들을 병합하여라
+# k 사이즈인 민힙에 각 배열의 값들 하나씩 넣고, 팝을 하면 이 값이 젤 작은 수이고 이것들을 저장
+# 팝한 수가 들어있던 배열에서 다음 수를 민힙에 넣고, 팝을 하고 저장, 이를 반복
+
+# 어레이 챕터에 비슷한 유형 문제 있었음, 그런데 이 문제는 2개가 아니라 k개의 정렬된 배열이 주어짐
+# TC는 O(nlog(k))
+# SC는 민힙 유지하는 O(k)
+
 from typing import List
 import heapq
 
@@ -27,25 +36,28 @@ lists = [[1,5,7,9],[2,6,8],[3,4,10]]
 print(mergeKsortedLists(lists))
 
 
-###################################################
+
+####################################################################
+# k 사이즈인 민힙에 각 배열의 값들 하나씩 넣고, 팝을 하면 이 값이 젤 작은 수이고 이것들을 저장
+# 팝한 수가 들어있던 배열에서 다음 수를 민힙에 넣고, 팝을 하고 저장, 이를 반복
+# 반복이 끝나면 저장한 결과를 리턴
 
 
-def mergeSortedArrays(graph: List[List[int]]) -> List:
+def kMergeSortedArray(numArrays: List[List[int]]) -> List[int]:
   
-  sortedArray = []
   heap = []
-  for array in graph:
-    if len(array) == 0:
+  for numArray in numArrays:                                 # 처음 힙에는 각각의 배열의 (numArray[0], 0, numArray)의 형태로, k개 들어감 k = len(numArrays)
+    if len(numArray) == 0:
       continue
+    heapq.heappush(heap, (numArray[0], 0, numArray))
+    
 
-    heapq.heappush(heap, (array[0], 0, array))
-
+  results = []
   while heap:
-    num, idx, array = heapq.heappop(heap)
-    sortedArray.append(num)
-
+    value, idx, numArray = heapq.heappop(heap)
+    results.append(value)                             # results에는 오름차순으로 정렬된 값들이 들어가고 있음
     idx += 1
-    if len(array) > idx:
-      heapq.heappush(heap, (array[idx], idx, array))
+    if idx < len(numArray):
+      heapq.heappush(heap, (numArray[idx], idx, numArray))    # 팝한 수가 들어있던 배열에서 다음 수를 민힙에 넣고, 팝을 하고 저장, 이를 반복
 
-  return sortedArray
+  return results
