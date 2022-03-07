@@ -1,3 +1,5 @@
+# 힙은 바이너리 트리로 구현됨
+
 from typing import List
 
 #make parent node largest
