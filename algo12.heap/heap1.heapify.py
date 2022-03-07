@@ -1,4 +1,19 @@
 # 힙은 바이너리 트리로 구현됨
+# maxHeap 의 경우 부모가 자식노드들보다 항상 큰 complete binary tree(위에서 왼쪽으로 차있는 모양) 형태를 가짐
+# 젤 큰 값은 root 노드 위치에 있기에 이를 O(1) 으로 찾을 수 있음
+
+# add: 힙에 새로운 원소를 넣을 경우, 트리의 오른쪽 끝에 들어가고 이것이 부모 노드보다 크면 스왑, 이를 반복 O(log(n))
+# delete: 힙에 팝을 할 경우 루트노드를 팝하고, complete binary tree 오른쪽 끝에 있는 노드를 루트로 스왑한 후 자식노드와 비교해서 스왑 혹은 멈춤 고로 O(log(n))
+# build heap: O(n) 그냥 외워
+
+# 파이썬에서 heapq.heapify 는 최소힙
+
+# 힙의 complete binary tree이기 때문에 array로도 표현 가능
+# [9, 7, 5, 1, 3]의 경우
+# parentIdx = (leftChildIdx-1)/2
+# leftChildIdx = (parentIdx * 2) + 1
+# rightChildIdx = (parentIdx * 2) + 2
+
 
 from typing import List
 
