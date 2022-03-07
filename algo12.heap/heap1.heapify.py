@@ -43,7 +43,13 @@ arr = [1,3,5,7,9,4,6]
 heapify(arr)
 print(arr)
 
-#################################
+
+
+##############################################################
+# 배열의 중간 인덱스부터 0번째 인덱스로 내려가면서(즉 트리상으로는 올라가면서) 그 자식노드들과 비교하며 스왑
+# 배열의 중간 인덱스 다음으로는 트리상에서 자식노드가 없는 노드이기 때문에 생략, 어차피 이들의 부모노드들과 비교될 거임
+# 스왑한 후 그 자식 노드의 자식노드끼도 다시 비교해야 하기 때문에 재귀적으로 호출
+
 
 def swap(arr: List, rootIdx: int):
   largestIdx = rootIdx
@@ -58,9 +64,9 @@ def swap(arr: List, rootIdx: int):
 
   if largestIdx != rootIdx:
     arr[largestIdx], arr[rootIdx] = arr[rootIdx], arr[largestIdx]
-    swap(arr, largestIdx)
+    swap(arr, largestIdx)        # 스왑한 후 그 자식 노드의 자식노드끼도 다시 비교해야 하기 때문에 재귀적으로 호출
 
 def heapify(arr: List):
-  length = len(arr)
-  for idx in range(length, -1, -1):
-    swap(arr, idx)
+  halfLength = len(arr)//2
+  for idx in range(halfLength, -1, -1): # 배열의 중간 인덱스부터 0번째 인덱스로 내려가면서(즉 트리상으로는 올라가면서) 그 자식노드들과 비교하며 스왑
+    swap(arr, idx)                      # 배열의 중간 인덱스 다음으로는 트리상에서 자식노드가 없는 노드이기 때문에 생략, 어차피 이들의 부모노드들과 비교될 거임
