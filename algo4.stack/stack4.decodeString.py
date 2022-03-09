@@ -1,9 +1,14 @@
 # 394
-# 
+# 문제: s 로 주어진 계산식을 계산하여라
+# 'b2[ak]' : 'ak'가 2번 반복되고 'b'가 그 앞에 붙는 'bakak' 리턴해야함
+# 괄호 안에 문자를 앞에 숫자만큼 반복하고 'b'는 앞에 붙는 거임
+
 # 괄호를 보자마자 스택 접근을 생각해야함
 
 # 스택 컨셉은 간단한데 코드구현은 까다롭기에 중급
 # 스택의 특성, 선입후출 구조를 잘 생각해야함.
+
+# 'a2[b2[ak]]' 이런건 쉬운데, '23[a]100[def]42[b]' 이런경우 23을 처리하기 까다로움
 
 
 def decodeString(s: str) -> str:
@@ -34,8 +39,24 @@ def decodeString(s: str) -> str:
     return cur_str
 
 decodeString(s='a2[b2[ak]]')
+'abakakbakak'
 
-##############################################
+decodeString(s='23[a]100[def]42[b]')
+'aaaaaaaaaaaaaaaaaaaaaaadefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefdefbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb'
+
+
+
+
+#################################################################################
+# 'a2[b2[ak]]' 이런건 쉬운데, '23[a]100[def]42[b]' 이런경우 23을 처리하기 까다로움
+
+# b2[ak] 같은 경우 'bakak'를 구해야함
+# 포인트는 b2[ak] 같은 경우 괄호가 시작할때('[') stack, numStack에 각각 'b', 2 를 넣고
+# 'a', 'k'는 tempChar에 넣어서 'ak' 를 만듬
+# 그리고 괄호가 끝날때 (']') tempChar에 'ak'가 numStack에 들어있는 2번 반복하고 그 앞에 stack에 들어있는 'b'가 붙어야 함
+# stack.pop() + (tempChar * numStack.pop()) == 'b' + ('ak' * 2) == 'b' + 'akak' == 'bakak'
+# 이를 반복
+
 
 
 def decodeString(string: str) -> str:
@@ -46,7 +67,7 @@ def decodeString(string: str) -> str:
   tempNum = 0
 
   for c in string:
-    if c == '[':
+    if c == '[':                    # 괄호가 시작되면 괄호 전의 문자와 숫자를 각각 stack, numStack에 넣어준다, 나중에 이 괄호가 닫힐때 이 괄호안에 문자열이 몇번 반복되고, 그 앞에 붙을 문자는 무엇인지 결정하기 위해
       stack.append(tempChar)
       numStack.append(tempNum)
 

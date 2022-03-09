@@ -1,4 +1,5 @@
 # 1047
+# 문제: string 에서 같은 두개의 연속된 알파벳들을 제거하여라 
 # 문자열안에 2개 알파벳 있으면 지워주기
 
 
@@ -33,7 +34,7 @@ def removeDuplicates2(s: str, k: int) -> str:
       if dup_count < k-1:
         stack.append(c)
         count_stack.append(dup_count+1)
-      elif dup_count == k-1:
+      elif dup_count == k-1:            # dup_count가 k-1이면 현재 k번 연속으로 나왔다는 뜻임
         for _ in range(k-1):
           stack.pop()
           count_stack.pop()
@@ -46,7 +47,12 @@ def removeDuplicates2(s: str, k: int) -> str:
 
 print(removeDuplicates2(s='abbcddde',k=3))
 
-################################################################
+
+
+
+###########################################################################
+
+
 
 
 def removeDuplicatesK(string: str, k: int) -> str:
