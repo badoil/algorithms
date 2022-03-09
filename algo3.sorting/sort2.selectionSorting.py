@@ -1,10 +1,9 @@
-# 선캑정렬
+# 선택정렬
 # 순서대로 선택한 인덱스를 기준으로, 그 오른쪽에서 가장 작은 값과 기준값을 계속해서 스왑해주는 것이 선택 정렬
 # O(log n*n) 알고리즘으로 알고만 넘어가자
 # 언스테이블 소팅임
 
 
-from re import I
 from typing import List
 
 def selectionSort(nums: List) -> List:

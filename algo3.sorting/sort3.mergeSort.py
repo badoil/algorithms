@@ -51,7 +51,18 @@ def mergeSort(nums:List[int]) -> List[int]:
 mergeSort(nums=[5,7,9,3,1,2,4])
 
 
+
+
+
 ########################################################
+# 주어진 배열을 일단 재귀함수로 각 원소까지 쪼갬
+# 그리고 그것들을 while문 처리해서 mergeResult로 리턴
+# 리턴된 애들이 leftSortedNum, rightSortedNum 담아 있을거고, 얘들로 while문 처리해서 mergeResult로 리턴
+# 이를 반복하면 정렬된 최종 배열 완성
+
+# TC 재귀로 배열의 원소까지 쪼개는 O(log n)의 작업을 배열의 원소 갯수 n 만큼 하므로, O(nlog n)
+# SC O(n), 정렬된 하위배열을 합칠때 O(n)의 공간이 필요해서
+
 
 
 def mergeSorting(nums: List[int]) -> List[int]:
@@ -73,13 +84,13 @@ def mergeSorting(nums: List[int]) -> List[int]:
 
   # 병합하는 부분
   while leftIdx < len(leftSortedNum) or rightIdx < len(rightSortedNum):   # 둘 중 하나의 쪼개진 배열의 인덱스를 넘지 않는 동안
-    if leftIdx == len(leftSortedNum):                                     # 두 배열 중 한 배열의 원소들을 다 합쳐주었다면
+    if leftIdx == len(leftSortedNum):                                     # 이는 mergeResult에 leftSortedNum 값들을 모두 정렬해서 넣었다는 의미, 즉 두 배열 중 한 배열(왼쪽 배열)의 원소들을 다 합쳤다는 뜻
       lastRightNum = rightSortedNum[rightIdx]                                       # 남은 다른 배열의 원소를 합쳐줌
       mergeResult.append(lastRightNum)
-      rightIdx += 1
+      rightIdx += 1    # 현재 오른쪽 배열의 해당 인덱스를 처러했으므로 하나 올려줌                                     
       continue
 
-    if rightIdx == len(rightSortedNum):                                  # 두 배열 중 한 배열의 원소들을 다 합쳐주었다면
+    if rightIdx == len(rightSortedNum):                                  #  이는 mergeResult에 rightSortedNum의 값들을 모두 정렬해서 넣었다는 의미, 즉 두 배열 중 한 배열(오른쪽 배열)의 원소들을 다 합쳤다는 뜻
       lastLeftNum = leftSortedNum[leftIdx]                                        # 남은 다른 배열의 원소를 합쳐줌
       mergeResult.append(lastLeftNum)
       leftIdx += 1
