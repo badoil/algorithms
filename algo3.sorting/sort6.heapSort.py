@@ -24,7 +24,13 @@ def heapSort(nums:List[int])->List[int]:
 print(heapSort(nums=[3, 5, 7, 9, 4, 2]))
 
 
+
+
 ##################################################3
+# 기본적인 아이디어는 주어진 배열로 최대힙을 만들어서 힙팝을 해주면 최대 값이 튀어나오므로
+# 그 값을 인덱스에 맞춰서 새롭게 배열을 만들어서 리턴
+
+
 
 def heapSorting(nums: List[int]) -> List[int]:
   nums = [-1*num for num in nums]
