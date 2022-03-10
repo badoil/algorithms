@@ -1,5 +1,6 @@
 # 70
-# 문제: n개의 계단을 오르고자 한다. 한번에 1개, 2개씩의 계단을 오를수 있을때 총 몇가지 방벙으로 계단을 오를 수 있는가?
+# 문제: n개의 계단을 오르고자 한다. 한번에 1개 또는 2개씩의 계단을 오를수 있을때 총 몇가지 방벙으로 계단을 오를 수 있는가?
+
 # F(0) = 0, F(1) = 1, F(2) = 2
 
 from typing import List
@@ -16,7 +17,7 @@ def topDownclimbingStairs(num: int) -> int:
   fibo = topDownclimbingStairs(num-2) + topDownclimbingStairs(num-1)
   return fibo
 
-def bottomUpclimbingStairs(num: int):
+def bottomUpClimbingStairs(num: int):
   dpArray = [0, 1, 2]
 
   if len(dpArray) > num:
@@ -30,7 +31,7 @@ def bottomUpclimbingStairs(num: int):
 
 
 # 746
-# 문제: i번째 계단을 오르는 비용이 cost[i]로 주어졌다. 계단을 한번에 한칸 혹은 두칸씩만 오를수 있을때,  전체 계단을 오르는 최소 비용은 얼마인가.
+# 문제: i번째 계단을 오르는 비용이 cost[i]로 주어졌다. 계단을 한번에 한칸 혹은 두칸씩만 오를수 있을때, 전체 계단을 오르는 최소 비용은 얼마인가.
 def minCostStairs(cost: List[int]) -> int:
     total_count = len(cost)
     min_cost = [0] * (total_count + 1)

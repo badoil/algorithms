@@ -1,7 +1,7 @@
 # 64
 # 문제: 2d array로 길을 가기 위한 비용이 주어진다. 왼쪽 위에서 오른족 아래까지 도달하기 위한 최소 비용은 얼마인가?
 # 최초 위치는 (0, 0), 진행방향은 아래 또는 오른쪽 뿐. 즉 (0, 0) -> (m, n)
-# 시간복잡도 O(m*n), 공간복잡도 O(m*n) -> O(1) 최적화 가능, i라는 row의 최소비용은 i-1, i 행이라는 두 줄만 필요하기 때문 
+# 시간복잡도 O(m*n), 공간복잡도 O(m*n) -> O(1) 최적화 가능, i라는 row의 최소비용을 구하기 위해서 i행, i-1행이라는 두 줄만 필요하기 때문 
 # 점화식 minCost(rowIdx, colIdx) = cost(rowIdx, colIdx) + min(cost(rowIdx-1, colIdx), cost(rowIdx, colIdx-1))
 
 from typing import List
@@ -34,7 +34,18 @@ def minPathSum(grid: List[List[int]]) -> int:
     minCost = minCost2d[rows-1][cols-1]    
     return minCost
 
+
+grid = [[1,3,1,2],[2,4,5,2],[3,4,5,6],[1,5,6,2]]
+print('minCost=',minPathSum(grid=grid))
+
+minCost= 17
+
+
+
+
 #########################################################################
+# 점화식 minCost(rowIdx, colIdx) = cost(rowIdx, colIdx) + min(cost(rowIdx-1, colIdx), cost(rowIdx, colIdx-1))
+
 
 
 
