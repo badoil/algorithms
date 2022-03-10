@@ -1,6 +1,7 @@
 # 380 좋은 문제임
-# O(1)의 insert, remove, random return 구현
 # 문제: O(1) Insert, Remove, Random Return을 지원하는 hash Set을 구현하여라
+
+# O(1)의 insert, remove, random return 구현
 # 해쉬를 이용하므로 O(1) 시간복잡도
 # 랜덤 초이스 때문에 배열도 이용해야하고, 해쉬테이블과 배열을 맞춰주면서 가야함
 

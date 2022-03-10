@@ -59,7 +59,8 @@ def subArraySum(nums: List[int], sum: int) -> List[int]:
     if hashTable.get(accNum) is None:     # elif 가 아니라 if 인 것에 주목, 위의 if 문과 별개임. 위 조건문에도 걸리고 이 조건문에도 걸리는 것
       hashTable[accNum] = [idx]
     else:
-      continue   # 사실 해시테이블에 누적수가 있다는게 중요하지 idx는 중요하지 않음. 그냥 continue 해줘도 무방할것임
+      #continue   # ?? 사실 해시테이블에 누적수가 있다는게 중요하지 idx는 중요하지 않음. 그냥 continue 해줘도 무방할것임
+      hashTable[accNum].append(idx)
                 # 하지만 만약 resultCount가 아니라 서브어레이 자체를 리턴하라고 하면 노코프처럼 해야할 것임
 
   return resultCount
