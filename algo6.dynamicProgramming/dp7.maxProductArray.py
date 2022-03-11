@@ -1,3 +1,4 @@
+# 152
 # 문제: 주어진 Array에서 최대곱 Maximum Subarray를 계산하여라
 
 # 이전 maxSubArraySum 과 같은 형태의 문제
@@ -32,7 +33,7 @@ def maxProduct(nums: List[int]) -> int:
 print(maxProduct(nums=[3,-2,1,0,-8,-9]))
 
 
-##########################################################
+############################################################################
 
 
 
@@ -46,7 +47,7 @@ def maxSubArrayProduct(nums: List[int]) -> int:
   dpMinArray = []       # 곱하기이다보니까 dp 테이블을 두가지, 즉 dpMinArray와 dpMaxArray 가 필요
   dpMaxArray = []
 
-  dpMinArray[0] = nums[0]
+  dpMinArray[0] = nums[0]   # 첫번째 수는 넣어주고
   dpMaxArray[0] = nums[0]
 
   for idx in range(1, len(nums)):
