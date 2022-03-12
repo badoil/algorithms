@@ -41,6 +41,8 @@ def coinChange(amount: int, coins: List[int]) -> int:
 # 경우의 수를 구하는 것이기 때문에 두 하위 문제의 솔루션을 더해준 것이 상위문제의 해답임
 # 포인트는 한 코인이 선택 안받은 경우 해당 코인을 제외하고 s는 그대로, 선택받은 경우 코인이 무제한이기때문에 그 코인 포함해서 남아있고 만들어야할 금액은 s-coin
 
+
+# DP(coins, amount) = DP(coins-1, amount) + DP(coins, amount-coin) 이때 DP(rowIdx = coins, colIdx = amount)
 # coins = [1, 2, 3]
 # dpTable, 세로축이 coins 동전, 가로축이 amount 합계, 해당값은 동전으로 합계를 만드는 경우의 수
 #           0   1   2   3   4   5   

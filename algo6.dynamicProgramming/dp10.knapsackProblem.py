@@ -22,6 +22,8 @@
 # knapsack(N, W) = max(knapsack((N-1, W-W[n]) + Val[n]), knapsack(N-1, W))
 # knapsack(N, W) 에서 변수가 2개기 때문에 2차원 dp테이블이 필요함
 
+
+# knapsack(N, W) = max(knapsack((N-1, W-W[n]) + Val[n]), knapsack(N-1, W))
 # dpTable, 세로축이 N 물건, 가로축이 W 무게, 해당값은 value
 #         0   1   2   3   4   5
 # 0   ''  0   0   0   0   0   0

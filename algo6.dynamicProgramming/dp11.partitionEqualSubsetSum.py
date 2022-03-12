@@ -58,6 +58,7 @@ print(canPartition(nums=[2,1,2,3,4]))
 # 이렇게 이를 점화식으로 dp(nums, sum) = dp(nums-1, sum-nums[n]) or dp(nums-1, sum)
 # 이를 디피테이블로 나타내면
 # 
+# dp(nums, sum) = dp(nums-1, sum-nums[n]) or dp(nums-1, sum) 이때 dp(rowIdx = nums, colIdx = sum)
 # dpTable, 세로축이 nums 수들, 가로축이 sum 합계, 해당값은 boolean
 #           0   1   2   3   4   5   6
 # 0     ''  T   F   F   F   F   F   F
