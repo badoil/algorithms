@@ -3,8 +3,45 @@
 # 각 물건의 갯수가 n 일때 모든 경우의 수는 2의 n 제곱이기 때문에 최적화 해줘야 함
 # 최적화는 다이나믹 프로그래밍을 의심해봐야함
 
-# 
+# 문제를 하위문제로 나눠라
+#            A   B   C   D
+# value     30  20  40  10
+# weight     1   2   3   4
 
+# knapsack('ABCD', weight=5) 는 knapsack('ABC', weight=1) value = 10 과 knapsack('ABC', weight=5) value = 0 로 나눠짐
+# 이때 knapsack('ABC', weight=5)가 5 그대로인 이유는 처음부터 'D'가 없었을 경우를 의미함 그래서 value는 안늘고 그대로 0
+
+# knapsack('ABC', weight=1) value = 10 는 다시, 'c'를 선택한 경우 knapsack('AB', weight= 1-3 = -2) weight가 -2가 되어 해당 없음
+# 그리고 'c'가 애초에 없었던 경우 knapsack('AB', weight=1)가 남음
+
+# knapsack('ABC', weight=5) value = 0 은 다시, 'c'를 선택한 경우 knapsack('AB', weight=5-3=2) c의 value 인 40을 더해서, value = 40
+# 그리고 'c'가 애초에 없었던 경우 knapsack('AB', weight=5)  value = 0 가 남음
+# 이렇게 가지치기 반복
+
+# 위의 가지치기 된 피라미드 꼴은 아래와 같은 점화식으로 표현
+# knapsack(N, W) = max(knapsack((N-1, W-W[n]) + Val[n]), knapsack(N-1, W))
+# knapsack(N, W) 에서 변수가 2개기 때문에 2차원 dp테이블이 필요함
+
+# dpTable, 세로축이 N 물건, 가로축이 W 무게, 해당값은 value
+#         0   1   2   3   4   5
+# 0   ''  0   0   0   0   0   0
+# 1    A  0  30  30  30  30  30
+# 2   AB  0  30  30  50  50  50
+# 3  ABC  0  30  30  50  70  70
+# 4 ABCD  0  30  30  50  70  70
+# 이때 우리가 알아야하는 값은 'ABCD'가 전부 있는 케이스 N=4, W=5 인 knapsack(4, 5)이고, 이는 디피테이블의 dpTable[4][5]
+# dpTable[4][5] 값을 알아내기 위해서 탑다운, 바텀업 사용가능 
+# 탑다운의 경우 knapsack(4, 5) = max(knapsack((N-1=3, W-W[n]=5-4=1) + Val[n])=10, knapsack(N-1=3, W=5)) 즉 max(knapsack((3, 1) + 10, knapsack(3, 5))
+# 이런식으로 재귀적인 탑다운 방식이 반복된다. 그러므로 초기값 dpTable[N][0], dpTable[0][W] 을 미리 구해둠. 각 모두 0임, 왜냐하면 물건이 0이면 무게도 0이고 그 반대도 마찬가지이기 때문
+# 바텀업의 경우 초기값으로부터 대각선으로 가는경우는 해당물건이 있었던 경우, 세로방향으로 가는경우는 해당물건이 없는 경우로, 둘 중 max 값 선택해서 디피테이블에 기입
+# dpTable[4][5] = 70 이므로 이를 거꾸로 추적하면, 70이 세로에서 내려오니까 D는 없었고, N=3 일때 대각선에서 오므로 C는 있음. N=2일때 30은 세로에서 내려오므로 B는 없었음, N=1일때 A임
+# 고로 A, C가 있고 최대 값은 70 임
+
+# 시간복잡도 O(N * W), 공간복잡도 O(N * W)
+# 그런데 이때 공간복잡도는 디피테이블의 값을 구하는데 바로 이전 행의 값들만 필요하므로 O(W)로 최적화 가능 O(W)
+
+
+ 
 from typing import List
 
 class ObjectVal:
