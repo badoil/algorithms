@@ -1,5 +1,20 @@
 # 17
 
+# Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent. Return the answer in any order.
+# A mapping of digit to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.
+# Example 1:
+# Input: digits = "23"
+# Output: ["ad","ae","af","bd","be","bf","cd","ce","cf"]
+
+# Example 3:
+# Input: digits = "2"
+# Output: ["a","b","c"]
+
+# Constraints:
+# 0 <= digits.length <= 4
+# digits[i] is a digit in the range ['2', '9'].
+
+
 # 백트랙킹을 다이내믹 프로그래밍 뒤에 일부러 둔거임.
 # 디피는 문제를 하위문제로 나누면서 메모이제이션으로 중복 처리를 제거해서 처리
 # 비티는 모든 가능한 경우의 수, 즉  디시젼 스페이스의 가능성 모둘를 하나씩 탐색하면서 디시전 스페이스를 탐색해 나가는것
@@ -49,33 +64,35 @@ letterComb = LetterCombinations()
 print(letterComb.solutions(digits='259'))
 
 
+
+
 #################################################################################
 
 
 
 class NumKeyPad:
-  def solution(self, letters: str) -> List[str]:
+  def solution(self, digits: str) -> List[str]:
     self._keypad = ['','','abc','def','ghi','jkl','mno','pqrs','tuv','wxyz']
 
-    if len(letters) == 0:
+    if len(digits) == 0:
       return []
 
-    self._count = len(letters)
-    self._letters = letters
+    self._count = len(digits)
+    self._digits = digits
     self._results = []
     self._bt(idx=0, crtString=[])
     return self._results
 
   def _bt(self, idx: int, crtString: List[str]):
-    if idx == self._count:
+    if idx == self._count:                        # 종료조건, idx가 digits의 길이를 넘을때 종료하고 그때까지 만든 문자열 self._results에 append
       combi = ''.join(crtString)
       self._results.append(combi)
       return
 
-    num = int(self._letters[idx])
+    num = int(self._digits[idx])
     chars = self._keypad[num]
     for char in chars:            # 포문은 'abc' 각 문자에 대해서 탐색. 즉 가지치기를 함. 이 중 한 문자를 선택한 상태에서(crtString으로 넣어줌) 이 과정을 또 재귀적으로 호출 
-      crtString.append(char)
+      crtString.append(char)      # 선택한 문자열을 가지고 다음 선택을 하러 가는것
       self._bt(idx+1, crtString)
       crtString.pop()             # crtString에 바로 전 인덱스인 idx에 num = int(self._letters[idx]) 해당하는 캐릭터가 들어있는데, 그것이 포문 돌아갈때마다
                                   # crtString.append(char)에서 추가되기 때문에 그 전 턴에서 팝을 해줘야 함
