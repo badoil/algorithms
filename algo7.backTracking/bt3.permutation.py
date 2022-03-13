@@ -3,6 +3,23 @@
 # 문제: nums로 주어진 숫자로 만들수 있는 모든 permutation들을 return 하여라
 # 유니크한 양수만 주어짐
 
+# Given an array nums of distinct integers, return all the possible permutations. You can return the answer in any order.
+
+# Example 1:
+# Input: nums = [1,2,3]
+# Output: [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+
+# Example 2:
+# Input: nums = [0,1]
+# Output: [[0,1],[1,0]]
+
+# Constraints:
+# 1 <= nums.length <= 6
+# -10 <= nums[i] <= 10
+# All the integers of nums are unique.
+
+
+
 # 재귀를 사용하는 이유는 하나의 레벨에 대한 함수 정의만 하면 되기 때문에 코드가 간결 
 
 
@@ -33,7 +50,9 @@ perm = Perm()
 perm.permute(nums=[1,2,3])
 
 
-##################################################################
+
+
+##############################################################################
 
 
 
@@ -57,6 +76,6 @@ class Permutation:
 
       crtArray.append(num)
       self._bt(crtArray)
-      crtArray.pop()
+      crtArray.pop()          # 포문이 돌아가기 때문에 팝을 해줘야함. 다음 포문에 영향을 미치지 않기 위해서
 
     
