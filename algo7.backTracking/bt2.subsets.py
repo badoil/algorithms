@@ -1,6 +1,24 @@
 # 78
 # 문제: nums로 주어진 숫자로 만들수 있는 subsets들을 return하여라
 
+# Given an integer array nums of unique elements, return all possible subsets (the power set).
+# The solution set must not contain duplicate subsets. Return the solution in any order.
+
+# Example 1:
+# Input: nums = [1,2,3]
+# Output: [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
+
+# Example 2:
+# Input: nums = [0]
+# Output: [[],[0]]
+
+# Constraints:
+# 1 <= nums.length <= 10
+# -10 <= nums[i] <= 10
+# All the numbers of nums are unique.
+
+
+
 # 함수를 재귀적으로 호출할때 value가 아니라 reference로 호출하면 메모리 낭비를 줄임
 # 시간복잡도 O(n * 3의 n제곱) 이 중 3은 입력되는 정수의 갯수, n도 그 갯수임
 # 공간복잡도 O(n), 각 단계마다 레터가 복사되는게 아니라 참조일 경우
@@ -39,6 +57,8 @@ subsets = Subsets()
 subsets.getSubsets(nums=[1,2,3])
 
 
+
+
 ############################################################
 
 
@@ -61,8 +81,8 @@ class Subset:
 
     num = self._nums[idx]
 
-    self._bt(idx+1, crtArray)
+    self._bt(idx+1, crtArray)   # 현재 num을 선택하지 않은 경우
 
     crtArray.append(num)
-    self._bt(id+1, crtArray)
+    self._bt(idx+1, crtArray)   # 현재 num을 선택한 경우
     crtArray.pop()
