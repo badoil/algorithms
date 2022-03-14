@@ -1,7 +1,27 @@
 # 206
-# 문제 : 주어진 LinkedList를 뒤집어라\
+# 문제 : 주어진 LinkedList를 뒤집어라
 # 예제 : 1→3→5→7→9\
 # 답 : 9→7→5→3→1
+
+# Given the head of a singly linked list, reverse the list, and return the reversed list.
+
+# Example 1:
+# Input: head = [1,2,3,4,5]
+# Output: [5,4,3,2,1]
+
+# Example 2:
+# Input: head = [1,2]
+# Output: [2,1]
+
+#Example 3:
+# Input: head = []
+# Output: []
+ 
+# Constraints:
+# The number of nodes in the list is the range [0, 5000].
+# -5000 <= Node.val <= 5000
+
+
 
 from typing import List
 
@@ -73,7 +93,12 @@ rvs_head = rvs_list.recursiveWay(head)
 printNodes(rvs_head)
 
 
-#######################################################################
+
+
+
+################################################################################
+
+
 
 
 
@@ -110,7 +135,7 @@ class Reverse:
 
     return prevNode
 
-  def recursiveWay(self, head: ListNode) -> ListNode:
+  def recursiveWay(self, head: ListNode) -> ListNode:   # 재귀적인 방법은 노드의 끝에서부터, 노드의 방향을 역방향으로 만들며 진행
     # exit condition
     if head is None:
       return head
@@ -118,6 +143,7 @@ class Reverse:
       return head
 
     reverseHead = self.recursiveWay(head.next)    # 스택은 해당 노드의 오른쪽 끝까지 쌓이다가 head를 리턴받고(exit condition) 이 reverseHead를 계속 이전 스택으로 넘긴다
+                                                  # 이때 reverseHead = head 할당 받으므로 아래 역방향 만드는 과정에서 head를 조작하면 됨, 그리고 그 reverseHead 리턴
     
     # making reverse direction
     head.next.next = head                         # 해당 헤드의 오른쪽으로 다음 다음 헤드가 해당 헤드를 가리키게 만들어서, 헤당 헤드의 바로 오른쪽에 있는 헤드의 방향이 해당 헤드로(왼쪽으로) 바뀐다

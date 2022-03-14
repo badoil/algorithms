@@ -7,7 +7,7 @@
 from typing import List
 
 class ListNode:
-  def __init(self, val):
+  def __init__(self, val):
     self.val = val
     self.next = None
 
@@ -78,7 +78,16 @@ print(finder.twoNodesWay(list_a,list_b).val)
 print(finder.hashWay(list_a,list_b).val)
 
 
-##########################################################################
+
+
+##################################################################################################
+# 풀이1(hashWay): 해쉬셋을 이용해서 현재 노드가 거쳐온 노드인지 판단, 시간복작도 O(n) 공간복잡도 O(n)
+# 풀이2(twoNodesWay):  공간복잡도 O(1)으로 풀어라. 두 노드의 현재노드들을 동시에 nodeA nodeB를 거치게 한 후 각각 교차해서 다시 처음부터 시작하면 교차점에서 만나게됨.
+
+#list a 1-3-5 \
+#              7 - 9
+#list b     2 /
+#intersection is seven
 
 
 def makeNodeList(nums: List[int]) -> ListNode:
@@ -107,7 +116,7 @@ class Intersection:
     crtNodeA = nodeA
     crtNodeB = nodeB
 
-    while crtNodeA != crtNodeB:
+    while crtNodeA != crtNodeB:   # crtNodeA == crtNodeB 가 되는 순간 반복문 끝남, 교차점이 되는 순간 끝남
       if crtNodeA:                
         crtNodeA = crtNodeA.next
       else:                       # crtNodeA 끝났으면 nodeB로 교체
@@ -118,7 +127,7 @@ class Intersection:
       else:                       # crtNodeB 끝났으면 nodeA로 교체
         crtNodeB = nodeA
 
-    return crtNodeA               # 이렇게 교체해주면 두 노드의 교차저믕로부터의 거리차가 없어지고 동식에 교차점에서 만남
+    return crtNodeA               # crtNodeA == crtNodeB 가 되는 순간 반복문 끝나고 이것이 교차점임
 
 
   def hashWay(self, nodeA: ListNode, nodeB: ListNode) -> ListNode:
