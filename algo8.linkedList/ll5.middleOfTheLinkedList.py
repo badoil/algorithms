@@ -5,6 +5,25 @@
 # 예제2 : 1→2→3→4 \
 # output : 3→4
 
+
+# Given the head of a singly linked list, return the middle node of the linked list.
+# If there are two middle nodes, return the second middle node.
+
+# Example 1:
+# Input: head = [1,2,3,4,5]
+# Output: [3,4,5]
+# Explanation: The middle node of the list is node 3.
+
+# Example 2:
+# Input: head = [1,2,3,4,5,6]
+# Output: [4,5,6]
+# Explanation: Since the list has two middle nodes with values 3 and 4, we return the second one.
+ 
+# Constraints:
+# The number of nodes in the list is in the range [1, 100].
+# 1 <= Node.val <= 100
+
+
 # 풀이법1(countWay): 링크드 리스트의 총 카운트를 세서 중간 값을 구하고, 그 값까지 next반복하므로 총 2번의 반복문 필요
 # 풀이법2(arrayWay): 링크드 리스트를 배열에 넣고, 중간 인덱스로 구하고자 하는 노드 찾기, 배열에 링크드 리스트 넣을때 1번의 반목문 필요, 그러나 O(n)공간복잡도가 배열 때문에 필요
 # 풀이법3(fastSlowWay): fast & slow pointer 방법,  O(1)공간복잡도, 
@@ -89,7 +108,11 @@ printNodes(middle_node)
 
 
 
-#################################################################
+
+###################################################################################
+# 풀이법1(countWay): 링크드 리스트의 총 카운트를 세서 중간 값을 구하고, 그 값까지 next반복하므로 총 2번의 반복문 필요
+# 풀이법2(arrayWay): 링크드 리스트를 배열에 넣고, 중간 인덱스로 구하고자 하는 노드 찾기, 배열에 링크드 리스트 넣을때 1번의 반목문 필요, 그러나 O(n)공간복잡도가 배열 때문에 필요
+# 풀이법3(fastSlowWay): fast & slow pointer 방법,  O(1)공간복잡도, 
 
 
 
@@ -123,7 +146,7 @@ class Middle:
     return nodeList[half]
 
 
-  def fastSlowWay(self, node: ListNode) -> ListNode:
+  def fastSlowWay(self, node: ListNode) -> ListNode:    # fastNode가 2칸씩, slowNode가 1칸씩 가기에, fastNode가 끝날때 slowNode의 위치가 노드의 중간임
     fastNode = node
     slowNode = node
 
