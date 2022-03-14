@@ -1,5 +1,32 @@
-# 876
+# 141
 # 문제 : 주어진 LinkedList에 cycle이 있는지 확인하여라
+
+# Given head, the head of a linked list, determine if the linked list has a cycle in it.
+# There is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the next pointer. 
+# Internally, pos is used to denote the index of the node that tail's next pointer is connected to. Note that pos is not passed as a parameter.
+# Return true if there is a cycle in the linked list. Otherwise, return false.
+
+# Example 1:
+# Input: head = [3,2,0,-4], pos = 1
+# Output: true
+# Explanation: There is a cycle in the linked list, where the tail connects to the 1st node (0-indexed).
+
+# Example 2:
+# Input: head = [1,2], pos = 0
+# Output: true
+# Explanation: There is a cycle in the linked list, where the tail connects to the 0th node.
+
+# Example 3:
+# Input: head = [1], pos = -1
+# Output: false
+# Explanation: There is no cycle in the linked list.
+ 
+# Constraints:
+# The number of the nodes in the list is in the range [0, 104].
+# -105 <= Node.val <= 105
+# pos is -1 or a valid index in the linked-list.
+
+
 # 풀이1(hashWay): 해쉬셋을 이용해서 현재 노드가 거쳐온 노드인지 판단, 시간복작도 O(n) 공간복잡도 O(n)
 # 풀이2(fastSlowWay):  공간복잡도 O(1)으로 풀어라. fastSlowWay 적용하면 싸이클이 존재한다면 빠른노드와 느린노드는 결국 만나게 됨
 
@@ -75,7 +102,13 @@ hasLoop.hashWay(list_in)
 hasLoop.fastSlow(list_in)
 
 
-###########################################################
+
+
+
+###############################################################################
+# 풀이1(hashWay): 해쉬셋을 이용해서 현재 노드가 거쳐온 노드인지 판단, 시간복작도 O(n) 공간복잡도 O(n)
+# 풀이2(fastSlowWay):  공간복잡도 O(1)으로 풀어라. fastSlowWay 적용하면 싸이클이 존재한다면 빠른노드와 느린노드는 결국 만나게 됨
+
 
 
 
@@ -126,6 +159,7 @@ class Cycle:
 
     return False
 
+
   def fastSlowWay(self, node: ListNode) -> bool:
     if node is None:
       return False
@@ -139,7 +173,7 @@ class Cycle:
       else:
         break
 
-      if fast.val == slow.val:
+      if fast.val == slow.val:    # 싸이클이 존재한다면 빠른노드와 느린노드는 결국 만나게 됨
         return True
 
     return False
