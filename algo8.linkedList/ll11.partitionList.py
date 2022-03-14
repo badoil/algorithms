@@ -1,8 +1,21 @@
 # 86
-
 # 문제 : 주어진 List를 x보다 작은수를 먼저, x보다 큰수를 나중에 나오도록 partition하여라. 이때 순서가 list안 node의 순서가 바뀌면 안된다
-# input : 1→3→7→5→3→6→3, x=5 \
-# 답 :  1→3→3→7→5→6
+
+# Example 1:
+# Input: head = [1,4,3,2,5,2], x = 3
+# Output: [1,2,2,4,3,5]
+
+# Example 2:
+# Input: head = [2,1], x = 2
+# Output: [1,2]
+ 
+# Constraints:
+# The number of nodes in the list is in the range [0, 200].
+# -100 <= Node.val <= 100
+# -200 <= x <= 200
+
+# input : 1→7→5→3→6→3, x=5 \
+# 답 :  1→3→3→7→5→6     7→5→6이 위의 노드 순서 그대로 보존
 
 from typing import List
 
@@ -62,6 +75,8 @@ partitioner = Partitioner()
 head = createNodeList([1,3,7,5,3,6])
 partition_head = partitioner.partition(head,5)
 printNodes(partition_head)
+
+
 
 
 #########################################################################################
