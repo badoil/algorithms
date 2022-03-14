@@ -100,7 +100,7 @@ class RemoveElements:
     self._val = val
 
   def _recurRemove(self, node: NodeList) -> NodeList:   # 재귀적인 방법은 더미노드가 필요없음
-    if not node:
+    if not node:    # 종료조건
       return None
     
     nextNode = self._recurRemove(node.next)

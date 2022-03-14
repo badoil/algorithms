@@ -1,3 +1,4 @@
+# 21
 # 문제 : 주어진 두개의 정렬된 LinkedList를 정렬이 된 상태로 합쳐라 \
 # L1 :    1→3→5→7 \
 # L2 :    1→2→3→4
@@ -96,7 +97,13 @@ printNodes(merged_head)
 
     
 
-#######################################################################
+
+
+###########################################################################
+
+
+
+
 
 def createNodeList(nums: List[int]):
   if len(nums) == 0:
@@ -134,7 +141,7 @@ class Merge:
         node2 = node2.next
 
     if node1 is not None:           # 따라서 crtNode 는 두 노드 중 한 곳에서 끝까지 가게됨. 그때 다른 노드가 남게 되는데 이를 연결해줌
-      crtNode.next = node1
+      crtNode.next = node1          # 만약 node1의 값들이 너무 커가지고 node1이 많이 남아있더라도, crtNode와 연결만 해주면 됨. 그 다음은 이미 node1에 연결되어있음
 
     if node2 is not None:
       crtNode.next = node2
@@ -150,7 +157,7 @@ class Merge:
       return node1
 
     if node1.val <= node2.val:
-      node1.next = self.recurMerge(node1.next, node2)       # 스택을 생각할것!
+      node1.next = self.recurMerge(node1.next, node2)       # 스택을 생각할것! 노드의 끝에서 반대편으로 연결하면서 반복됨
       return node1
     else:
       node2.next = self.recurMerge(node1, node2.next)
