@@ -13,7 +13,7 @@ class NodeList:
     self.val = val
     self.next = None
 
-def printNodes(node:ListNode):
+def printNodes(node:NodeList):
   crnt_node = node
   while crnt_node is not None:
     print(crnt_node.val, end=' ')
@@ -24,13 +24,13 @@ class SLinkedList:
     self.head = None
 
   def addAtHead(self, val): #O(1)
-    node = ListNode(val)
+    node = NodeList(val)
     node.next = self.head
     self.head = node
 
   #but when the list
   def addBack(self, val): #O(n)
-    node = ListNode(val)
+    node = NodeList(val)
     crnt_node = self.head
     while crnt_node.next:
       crnt_node = crnt_node.next
@@ -45,7 +45,7 @@ class SLinkedList:
     raise RuntimeError('Node not found')
 
   def addAfter(self, node, val): #O(1)
-    new_node = ListNode(val)
+    new_node = NodeList(val)
     new_node.next = node.next
     node.next = new_node
 
@@ -65,7 +65,11 @@ slist.deleteAfter(node1)
 printNodes(slist.head)
 
 
-###########################################3
+
+
+##########################################################
+
+
 
 
 def iterNode(node: NodeList):
@@ -98,11 +102,11 @@ class SinglyLinkedList:
       crtNode = crtNode.next
     raise RuntimeError('not found')
 
-  def addAfter(self, node, val):
+  def addAfter(self, node, val):      # 주어진 node 다음에 val 의 값 같는 새로운 노드를 연결 
     newNode = NodeList(val)
-    newNode.next = node.next
+    newNode.next = node.next          # node -> node.next : 이 사이에 newNode를 넣음
     node.next = newNode
 
   def deleteAfter(self, prevNode):        # 지우려는 노드를 찾고 지우려면 O(n) 걸리기에, 바로 그 전 노드를 안다고 가정하면 O(1) 로 지울 수 있음
-    if prevNode.next is not None:         # 매니지드 언어에서는 지우려고 하는 prevNode의 다음 노드가 자동으로 삭제도지만 언매니지드에서는 직접 지워줘야함 
-      prevNode.next = prevNode.next.next  # 더블리 링크드 리스트였다면 prevNode 가 아니라 지우려는 노드 node를 넣어도 됨
+    if prevNode.next is not None:         # 매니지드 언어에서는 prevNode.next = prevNode.next.next 할때, 지우려고 하는 prevNode의 다음 노드가 자동으로 삭제되지만 언매니지드에서는 직접 지워줘야함 
+      prevNode.next = prevNode.next.next  # 더블리 링크드 리스트였다면 prevNode 가 아니라 지우려는 노드 node를 넣어도 됨, node의 이전 노드도 알 수 있기 때문
