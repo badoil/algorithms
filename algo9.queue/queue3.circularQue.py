@@ -1,8 +1,14 @@
 # 622
+# 문제 :   Circular Queue를 구현하여라
+# 서큘러 큐를 배열로 구현
+
 # 원형 큐는 실무에서도 많이 쓰임
 # 원형큐는 용량이 제한되어 있어서 오버플로우가 일어날 수 있음
 # 이를 리니어한 데이터 스트럭쳐로 구현해야함, 즉 array로
-# 인덱스가 배열의 길이를 넘어버리면 다시 처음으로 돌아가야함
+# 배열의 인덱스를 움직이면서 그에 해당하는 값을 넣어주거나(enquuee) 빼주어야함(dequeue)
+
+# 인덱스가 배열의 길이를 넘어버리면 rearIdx가 다시 처음으로 돌아가야함
+# 
 # 이때 idx % len(array) 해줘야, 그 나머지 값으로 인덱스를 다시 찾아감
 
 
@@ -50,7 +56,20 @@ class CircularQueue:
        raise RuntimeError('Queue is full')
 
 
-###############################
+circularQ = CircularQueue(4)
+circularQ.enQueue(1)
+circularQ.enQueue(3)
+circularQ.enQueue(5)
+circularQ.deQueue()
+print(circularQ.Front(),circularQ.Rear())
+
+# 3 5
+
+
+
+###############################################################################
+
+
 
 class CircularQueue:
   def __init__(self, k: int):
@@ -62,9 +81,9 @@ class CircularQueue:
   def enque(self, val: int):
     self.fullCheck()
 
-    self._rearIdx += 1
-    self._rearIdx = self._rearIdx % self._size
-    self._data[self._rearIdx] = val
+    self._rearIdx += 1                                # 엔큐는 끝에 원소가 들어가므로 rearIdx 체크
+    self._rearIdx = self._rearIdx % self._size        # 인덱스가 배열의 길이를 넘어버리면 rearIdx가 다시 처음으로 돌아가야함
+    self._data[self._rearIdx] = val                   # 만약 rearIdx가 길이를 넘었으면 rearIdx == size 이고 rearIdx는 0으로 들어감, 즉 앞에서 fullCheck 를 해주므로 rearIdx가 0이 비어있는 것
     self. _size -= 1
 
   def deque(self):
