@@ -40,8 +40,13 @@ class Queue:
     return value
 
 
-######################
-class Queue:
+
+
+#########################################################
+
+
+
+class Que:
   def __init__(self):
     self._headNode = QueueNode(-1)
     self._tailNode = QueueNode(-1)
