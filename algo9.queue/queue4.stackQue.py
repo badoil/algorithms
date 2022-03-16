@@ -44,7 +44,11 @@ print(queue.dequeue(), end= ' ')
 print(queue.dequeue(), end= ' ')
 
 
-###################################################
+
+
+#################################################################
+
+
 
 
 class StackQueue:
@@ -62,7 +66,7 @@ class StackQueue:
 
     self.movoToPopStack()
 
-    return self._pushStack.pop()
+    return self._popStack.pop()
 
 
   def movoToPopStack(self):
