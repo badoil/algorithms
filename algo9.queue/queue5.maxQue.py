@@ -1,6 +1,6 @@
 # 문제 :  Max Queue를 구현하여라
 # deque 는 doubly ended queue 라고 해서, 양쪽 끝 모두 인&아웃을 지원(append, appendleft, pop, popleft)
-# 즉 이 문제에서는 맥스큐를 디큐 사용하고, 직접 구현하지는 않음
+# 즉 이 문제에서는 맥스큐를 덱을 사용하고, 직접 구현하지는 않음
 
 # queue.SimpleQueue() 는 말 그대로 FIFO 인 심플한 큐
 # deque 는 양쪽에서 인앤아웃 가능

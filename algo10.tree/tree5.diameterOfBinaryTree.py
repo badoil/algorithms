@@ -94,6 +94,6 @@ class Diameter:
     crtDiameter = leftDepth + rightDepth                      # 이때 어떤 해당 노드의 left child 들의 뎁스와 right child 들의 뎁스를 합한 값이, 해당 노드의 max diameter
     self._maxDiameter = max(self._maxDiameter, crtDiameter)   # max diameter 를 갱신
 
-    crtDepth = max(leftDepth, rightDepth)
+    crtDepth = max(leftDepth, rightDepth)  # 이 해당 노드의 부모 노드에는 이 둘의 뎁스 값 중에 큰 값(max(left child depth, right child depth)) + 1(부모에서 자신까지의 뎁스) 을 해준 값을 전달 -> 이 값이 부모 노드에서의 뎁스
     return crtDepth + 1
     
