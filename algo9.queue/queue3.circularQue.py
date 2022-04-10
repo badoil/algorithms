@@ -74,7 +74,7 @@ print(circularQ.Front(),circularQ.Rear())
 class CircularQueue:
   def __init__(self, k: int):
     self._data = [None] * k
-    self._rearIdx = -1
+    self._rearIdx = -1                              # 인덱스로만 원형큐의 값들을 관리함. 실제 self._data에 값이 있더라도 _rearIdx와 _frontIdx 범위 바깥이면 지워진거로 간주
     self._frontIdx = 0
     self._size = k
 
