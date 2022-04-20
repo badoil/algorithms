@@ -164,7 +164,7 @@ class MakingTree:
     crtNode.left = leftResult
     crtNode.right = rightResult
 
-    return root
+    return crtNode
 
 
 class MakingTreeByHash:
