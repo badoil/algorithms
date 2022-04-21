@@ -17,7 +17,7 @@
 from typing import List
 
 def maxBoxUnits(boxUnits: List[List[int]], maxBoxes: int) -> int:
-  boxUnits.sort(key=lambda x:x[1], reverse=True)
+  boxUnits.sort(key=lambda x:x[1], reverse=True)  # 장난감 갯수를 기준으로 내림차순으로 정렬
 
   unitsCount = 0
   leftBoxes = maxBoxes
