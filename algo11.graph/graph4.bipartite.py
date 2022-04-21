@@ -77,7 +77,7 @@ def bipartiteDfs(graph: List[List[int]]) -> bool:
           colors[conVertex] = -1 * colors[vertex]
           continue    # seen 에 없으면 color 도 없기 때문에 다음 조건문을 확인할 필요 없이, 다음 순번으로 포문 이동
 
-        if colors[conVertex] == colors[connectedVertex]:
+        if colors[conVertex] == colors[vertex]:
           return False
 
     return True

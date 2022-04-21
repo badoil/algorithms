@@ -89,7 +89,7 @@ class ShotestPathBFS:
       return -1
 
 
-    positonQ = deque()
+    positionQ = deque()
     countQ = deque()
     seen = set()
     self._row = row
@@ -101,8 +101,8 @@ class ShotestPathBFS:
     seen.add((0,0))
 
 
-    while positonQ:
-      y, x = positonQ.popleft()     # 현재 좌표
+    while positionQ:
+      y, x = positionQ.popleft()     # 현재 좌표
       count = countQ.popleft()      # 현재 좌표까지의 거리
       self._matrix[y][x] = count    # 그 거리를 매트릭스에 적어준다
 
@@ -116,7 +116,7 @@ class ShotestPathBFS:
         y, x = filteredNextPosition
         if (y, x) not in seen:
           seen.add((y, x))          # 현재 좌표의 다음 좌표를 처리
-          positonQ.append((y, x))
+          positionQ.append((y, x))
           countQ.append(count+1)
 
     return -1
