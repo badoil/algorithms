@@ -3,7 +3,7 @@
 
 
 # 싸이클 찾기 또는 deadlock 찾기
-# 방향성 없는 싸이클 있는 그래프는 DFS 로 찾는게 편함
+# 방향성 없고 싸이클 있는 그래프는 DFS 로 찾는게 편함
 # 방향성 있는 그래프는 싸이클이 있어도 싸이클을 발견하지 못하는 경우가 있는데 이를 해결하는 것이 이번 문제
 # postOrder DFS 로 해결한다고 하지만
 # 사실 내가 보기에 이 방법은 백트랙킹 방법임
@@ -80,5 +80,6 @@ class Cycle:
       if result is True:
         return True
     cycleTrack.remove(vertexIdx)
+    self._visited.add(vertexIdx)
 
     return False      # 재귀적으로 호출하다가 이도 저도 아니면(예를들어 위 두 조건문 모두 안걸리고, 다음 연결 버텍스도 없어서 포문도 돌릴일 없으면) False 리턴
