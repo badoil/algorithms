@@ -19,5 +19,24 @@ def findDuplicate(nums: List) -> int:
 
   return 0
 
-
 findDuplicate([1,2,3,4,5,2])
+
+
+
+
+########################################################
+# 이건 또다른 방식, 위에꺼가 더 나은거 같음
+
+
+
+def FindDuplicate(nums):
+  if len(nums) == 0:
+    return None
+  
+  for idx,num in enumerate(nums):
+    num_idx = abs(num)
+    if nums[num_idx] >= 0:
+      nums[num_idx] = -1 * nums[num_idx] 
+    else:
+      return idx
+  return print('No Duplicate')
