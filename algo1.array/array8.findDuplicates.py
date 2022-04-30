@@ -12,7 +12,7 @@ def findDuplicate(nums: List) -> int:
     return None
 
   for num in nums:
-    elem = nums[num]
+    elem = nums[num]    # 해당 num을 인덱스로 쓰면, 만약 num이 중복이라면 똑같은 인덱스 해당값을 가리키고 그 값이 음수라면 그 값은 이미 체크된 중복 수임
     if elem < 0 :        #주어진 배열은 양의 정수만 있는것
       return -elem
     nums[num] = -elem
