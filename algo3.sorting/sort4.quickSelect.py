@@ -103,7 +103,7 @@ def quickSelection(nums: List[int], nth: int) -> int:
 
   # 반복문을 마치면 leftIdx가 피봇값이 들어가야할 위치, 즉 그 배열의 length-leftIdx 번째 로 큰 위치를 가리킨다. nth=length-leftIdx 를 찾을때까지 함수를 재귀적으로 호출
   # 따라서 length-nth 는 찾고자하는 n번째로 큰 수의 위치를 가리키는 인덱스이고 이 인덱스가 leftIdx와 같으면 바로 그 값이 n번째로 큰 수임
-  if leftIdx == length-nth:
+  if leftIdx == length-nth:   # nth=length-leftIdx
     return nums[leftIdx]
 
   elif leftIdx < length-nth:        # 이 경우 n번째로 큰 수가 오른쪽에 있기 오른쪽 배열에 대해서 다시 퀵 셀렉션 함수 재귀적으로 호출
