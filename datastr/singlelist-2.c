@@ -30,7 +30,7 @@ int InsertNode(int pszData)
     if (g_pHead == NULL) {
         g_pHead = pNode;
     } else {
-        // pNode->next = g_pHead->next;     이거는 내가 했는데 틀린듯??
+        // pNode->next = g_pHead->next;     이거는 내가 했는데 틀린건가??
         // g_pHead->next = pNode;
 
         pNode->next = g_pHead;
@@ -38,6 +38,48 @@ int InsertNode(int pszData)
     }
     
     return 1;
+}
+
+void ReleaseData(void) {
+    NODE* pTmp = g_pHead;
+    while(pTmp != NULL) {
+        NODE* pDelete = pTmp;
+        pTmp = pTmp->next;
+        
+        printf("Delete: [%p] %s\n", pDelete, pDelete->szData);
+        free(pDelete);
+    }
+}
+
+int FindData(char* pszData)
+{
+    NODE* pTmp = g_pHead;
+    while(pTmp != NULL) 
+    {
+        if (strcmp(pTmp->next, pszData) == 0)
+            return 1;
+        pTmp = pTmp->next;
+    }
+    return 0;
+}
+
+int DeleteData(char* pszData)
+{
+    NODE* pTmp = g_pHead;
+    NODE* prev = NULL;
+    while(pTmp != NULL) 
+    {
+        if (strcmp(pTmp->next, pszData) == 0)
+        {
+            if (prev!=NULL) prev->next = pTmp->next;
+            else g_pHead = pTmp->next;
+            
+            free(pTmp);  
+        }
+        prev = pTmp;
+        pTmp = pTmp->next;
+    }
+    return 0;
 }
 
 int main() {
@@ -52,6 +94,9 @@ int main() {
     InsertNode("test03");
     PrintList();
 
+    if (FindData("test03")==1) printf("test03 found!\n");
+
+    ReleaseData();
     return 0;
 }
 
@@ -65,3 +110,6 @@ int main() {
 4. 각 함수를 작성할때마다 main함수에서
     테스트 코드를 실행한다
 */
+
+
+// 이것은 g_pHead에 처음 노드를 할당해서 연결리스트 만듬
