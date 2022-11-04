@@ -33,3 +33,5 @@ int main() {
 
 // deep copy와 shallow copy 차이
 // pDstData3 = srcData;    // 이렇게 하면 오류, 이건 단지 주소만 복사한것, 더 큰 문제는 기존에 할당받은 pDstData3가 가리키는 메모리가 지워지지 않고 남게되어 메모리 릭
+// 만약 free(pDstData3) 했다면 에러가 났을 것
+// 왜냐하면 pDstData3는 srcData의 주소인데, 이를 프리한다는것은 char srcData[12] = {'hello'} 이 자동할당된 것을 해제하는 것이기에 오류
