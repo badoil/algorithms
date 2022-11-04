@@ -41,7 +41,7 @@ int InsertNode(int pszData)
 }
 
 void ReleaseData(void) {
-    NODE* pTmp = g_pHead;
+    NODE* pTmp = g_pHead->next;
     while(pTmp != NULL) {
         NODE* pDelete = pTmp;
         pTmp = pTmp->next;
@@ -49,6 +49,8 @@ void ReleaseData(void) {
         printf("Delete: [%p] %s\n", pDelete, pDelete->szData);
         free(pDelete);
     }
+    g_pHead->next = 0;      // g_pHead->next가 메모리 해제 되었기 때문에 이것을 안해주면 쓰레기 값을 가리키게됨, 후에 InsertNode하면 삽입된 노드가 이 쓰레기 노드에 접근하는데 이때 에러 발생
+    
 }
 
 int FindData(char* pszData)
