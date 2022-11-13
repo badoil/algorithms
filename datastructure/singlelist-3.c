@@ -13,6 +13,8 @@ typedef struct NODE
 
 NODE g_head = { 0 };
 
+NODE* g_pTail = 0;
+
 int IsEmpty() 
 {
     if (g_head.next == NULL) {
@@ -29,6 +31,7 @@ int InsertAtHead(char* pszData)
     if (IsEmpty())
     {
         g_head.next = pNode;
+        g_pTail = pNode;    // 처음 노드가 헤드에 추가되었으면 테일 포인터를 pNode 가리키도록함, 헤드에 추가되니깐 이 외에 테일포인터를 할당할 일이 없음
     } else
     {
         pNode->next = g_head.next;
@@ -41,16 +44,29 @@ int InsertAtHead(char* pszData)
 
 int InsertAtTail(char* pszData)
 {
-    NODE* pTmp = &g_head;
-    while(pTmp->next != NULL){
-        pTmp = pTmp->next;
-    }
+    // NODE* pTmp = &g_head;
+    // while(pTmp->next != NULL){
+    //     pTmp = pTmp->next;
+    // }                            테일 포인터를 이용해서 반복문 쓰는 불필요한 연산 없앰
 
     NODE* pNode = (NODE*)malloc(sizeof(NODE));
     memset(pNode, 0, sizeof(NODE));
     strcpy_s(pNode->szData, sizeof(pNode->szData) , pszData);
 
-    pTmp->next = pNode;
+    if (IsEmpty())
+    {
+        g_head.next = pNode;
+    }
+    else
+    {
+        g_pTail->next = pNode;
+    }
+    g_pTail = pNode;
+
+
+    // pTmp->next = pNode;  // 위에 while 썼을때 필요했던것
+
+
 }
 
 void PrintList(void) 
@@ -86,6 +102,8 @@ int DeleteData(char* pszData)
         NODE* deleteNode = pPrev->next;
         pPrev->next = deleteNode->next;
 
+        if (deleteNode == g_pTail) g_pTail = 0;
+
         free(deleteNode);    
         return 1;
     }
@@ -102,7 +120,7 @@ void ReleaseData(void) {
         free(pDelete);
     }
     g_head.next = 0;      // g_pHead->next가 메모리 해제 되었기 때문에 이것을 안해주면 쓰레기 값을 가리키게됨, 후에 InsertNode하면 삽입된 노드가 이 쓰레기 노드에 접근하는데 이때 에러 발생
-    
+    g_pTail = 0;        // 위와 마찬가지 이유
 }
 
 void PushData(char* pszData) 
