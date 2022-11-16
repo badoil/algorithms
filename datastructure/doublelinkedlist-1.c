@@ -97,13 +97,30 @@ int insertAtTail(const char *pszData)
     return g_nSize ;
 }
 
-NODE* findNode(const char *pszData) {
+NODE* findNode(const char *pszData) 
+{
+    NODE* pTmp = g_pHead;
+    while(pTmp != g_pTail)
+    {
+        if(strcmp(pTmp->szData, pszData) == 0)
+        {
+            return pTmp;
+        }
+        pTmp = pTmp->next;
+    }    
+    
     return NULL;
 }
 
 int deleteNode(const char *pszData)
 {
-    NODE* deleteNode = findNode(pszData);
+    NODE* pNode = findNode(pszData);
+
+    pNode->prev->next = pNode->next;
+    pNode->next->prev = pNode->prev;
+
+    printf("deleteNode(): %p", pNode);
+    free(pNode);
     return 0;
 }
 
@@ -122,6 +139,10 @@ int main(void)
     insertAtHead("test01");
     insertAtHead("test02");
     insertAtHead("test03");
+
+    printList();
+    
+    printf("findNode()", findNode("test01")); 
 
     releaseList();
 
