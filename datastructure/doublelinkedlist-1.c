@@ -16,6 +16,7 @@ NODE* g_pHead;
 NODE* g_pTail;
 int g_nSize;
 
+void insertBefore(NODE* pTmp, const char* pszData);
 
 void initList(void) 
 {
@@ -81,19 +82,21 @@ int insertAtHead(const char *pszData)
 
 int insertAtTail(const char *pszData) 
 {
-    NODE* pNewNode = malloc(sizeof(NODE));
-    memset(pNewNode, 0, sizeof(NODE));
+    // NODE* pNewNode = malloc(sizeof(NODE));
+    // memset(pNewNode, 0, sizeof(NODE));
 
-    strcpy_s(pNewNode->szData, sizeof(pNewNode->szData), pszData);
+    // strcpy_s(pNewNode->szData, sizeof(pNewNode->szData), pszData);
 
-    pNewNode->prev = g_pTail->prev;
-    pNewNode->next = g_pTail;
+    // pNewNode->prev = g_pTail->prev;
+    // pNewNode->next = g_pTail;
 
-    g_pTail->prev = pNewNode;
-    pNewNode->prev->next = pNewNode;
+    // g_pTail->prev = pNewNode;
+    // pNewNode->prev->next = pNewNode;
 
-    g_nSize++;
-    
+    // g_nSize++;
+
+    insertBefore(g_pTail, pszData);
+     
     return g_nSize ;
 }
 
@@ -121,7 +124,62 @@ int deleteNode(const char *pszData)
 
     printf("deleteNode(): %p", pNode);
     free(pNode);
+
+    g_nSize--;
     return 0;
+}
+
+void insertBefore(NODE* pTmp, const char* pszData) 
+{
+    NODE* pNewNode = malloc(sizeof(NODE));
+    memset(pNewNode, 0, sizeof(NODE));
+
+    strcpy_s(pNewNode->szData, sizeof(pNewNode->szData), pszData);
+
+    pNewNode->prev = pTmp->prev;
+    pNewNode->next = pTmp;
+
+    pTmp->prev = pNewNode;
+    pNewNode->prev->next = pNewNode;
+
+    g_nSize++;
+}
+
+int insertAt(int idx, const char* pszData)
+{
+
+    int i=0;
+    NODE* pTmp = g_pHead->next;
+    while(pTmp != g_pTail)
+    {
+        if (i==idx)
+        {
+            insertBefore(pTmp, pszData);
+            return i;
+        }
+        i++;
+        pTmp = pTmp->next;
+    }
+
+    insertAtTail(pszData);
+    return i;
+}
+
+int getAt(int idx) 
+{
+    int i = 0;
+    NODE* pTmp = g_pHead->next;
+    while(pTmp != g_pTail)
+    {
+        if (i==idx)
+        {
+            return pTmp;
+        }
+        i++;
+        pTmp = pTmp->next;
+    }
+
+    return NULL;
 }
 
 int getSize(void) {
